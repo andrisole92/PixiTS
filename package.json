@@ -15,11 +15,11 @@
     "start": "npm run build && npm run serve"
   },
   "keywords": [],
-  "author": "dacaher",
+  "author": "Andres",
   "license": "MIT",
   "dependencies": {
     "lodash": "^4.17.10",
-    "pixi-action": "^1.0.2"
+    "tslint-eslint-rules": "^5.4.0"
   },
   "devDependencies": {
     "awesome-typescript-loader": "^3.4.1",

@@ -66,7 +66,7 @@ export class PixiAppWrapper extends EventEmitter {
         zIndex: 100,
     };
 
-    private app: PIXI.Application;
+    public app: PIXI.Application;
     private appOptions: PixiAppWrapperOptions;
 
     private width: number;

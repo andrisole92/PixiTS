@@ -1,47 +1,49 @@
 import {Container} from 'pixi.js';
 import {SampleApp} from "app/sample-app";
+import Emitter = PIXI.particles.Emitter;
 
 export class HomeScreen extends Container {
     private app: SampleApp;
+    private renderer: any;
 
     constructor(app: SampleApp) {
         super();
+        this.renderer = app.app.app.renderer;
         this.app = app;
         const first = new PIXI.Sprite(PIXI.loader.resources.first.texture);
-        first.anchor.set(.5);
-        first.position.set(this.app.initialWidth / 2, 100);
         const second = new PIXI.Sprite(PIXI.loader.resources.second.texture);
-        second.anchor.set(.5);
-        second.position.set(this.app.initialWidth / 2, 200);
         const third = new PIXI.Sprite(PIXI.loader.resources.third.texture);
-        third.anchor.set(.5);
-        third.position.set(this.app.initialWidth / 2, 300);
-        first.interactive = true;
-        first.buttonMode = true;
-        second.interactive = true;
-        second.buttonMode = true;
-        third.interactive = true;
-        third.buttonMode = true;
-        first.on("pointerup", () => {
-            console.log('onFirst');
-            this.destroy();
-            this.app.onFirstScreen();
+        let buttons = [first,second,third];
+        buttons.forEach((b,i)=>{
+            Object.assign(b,{
+                interactive: true,
+                buttonMode: true,
+                cursor: 'hover',
+                position: new PIXI.Point(this.app.initialWidth / 2, 250 + 100*i),
+                anchor: new PIXI.Point(.5,.5)
+            })
         });
-        second.on("pointerup", () => {
-            console.log('onSecond');
-            this.destroy();
-            this.app.onSecondScreen();
 
-        });
-        third.on("pointerup", () => {
-            console.log('onThird')
-            this.destroy();
-            this.app.onThirdScreen();
+        first.on("pointerup", () => this.goToScreen(1));
+        second.on("pointerup", () => this.goToScreen(2));
+        third.on("pointerup", () => this.goToScreen(3));
+        this.addChild(first,second,third);
+    }
 
-        });
-        this.addChild(first)
-        this.addChild(second)
-        this.addChild(third)
-
+    goToScreen(n:number){
+        this.destroy();
+        switch (n){
+            case 1:
+                this.app.onFirstScreen();
+                break;
+            case 2:
+                this.app.onSecondScreen();
+                break;
+            case 3:
+                this.app.onThirdScreen();
+                break;
+            default:
+                break;
+        }
     }
 }

@@ -78,5 +78,5 @@ module.exports = merge(common, {
             warnings: true,
             errors: true
         }
-    },
+    }
 });

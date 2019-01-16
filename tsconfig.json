@@ -10,6 +10,7 @@
     "declaration": false,
     "noImplicitAny": true,
     "removeComments": true,
+    "lib": ["es2015", "es2017", "dom"],
     "typeRoots": [
       "node_modules/@types",
       "src/types"
